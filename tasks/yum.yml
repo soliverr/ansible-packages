@@ -4,10 +4,6 @@
     dest: /etc/yum.repos.d/{{ item.name }}.repo owner=root group=root mode=0644
   with_items: '{{ packages_repos }}'
 
-- name: yum | update cache
-  yum:
-    update_cache: yes
-
 - name: yum | remove packages
   yum:
     name: "{{ itme }}"
@@ -18,4 +14,5 @@
   yum:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items: '{{ packages_add }}'
